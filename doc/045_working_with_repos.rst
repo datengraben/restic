@@ -90,7 +90,7 @@ example from a local to a remote repository, you can use the ``copy`` command:
 
 .. code-block:: console
 
-    $ restic -r /srv/restic-repo-copy copy --from-repo /srv/restic-repo
+    $ restic -r /srv/restic-repo-copy copy --repo2 /srv/restic-repo
     repository d6504c63 opened successfully, password is correct
     repository 3dd0878c opened successfully, password is correct
 
@@ -117,8 +117,8 @@ be skipped by later copy runs.
     both the source and destination repository, *may occupy up to twice their
     space* in the destination repository. See below for how to avoid this.
 
-The source repository is specified with ``--from-repo`` or can be read
-from a file specified via ``--from-repository-file``. Both of these options
+The source repository is specified with ``--repo2`` or can be read
+from a file specified via ``--repository-file2``. Both of these options
 can also be set as environment variables ``$RESTIC_FROM_REPOSITORY`` or
 ``$RESTIC_FROM_REPOSITORY_FILE``, respectively. For the destination repository
 the password can be read from a file ``--from-password-file`` or from a command
@@ -146,14 +146,14 @@ and/or a comma-separated tag list:
 
 .. code-block:: console
 
-    $ restic -r /srv/restic-repo-copy copy --from-repo /srv/restic-repo --host luigi --path /srv --tag foo,bar
+    $ restic -r /srv/restic-repo-copy copy --repo2 /srv/restic-repo --host luigi --path /srv --tag foo,bar
 
 It is also possible to explicitly specify the list of snapshots to copy, in
 which case only these instead of all snapshots will be copied:
 
 .. code-block:: console
 
-    $ restic -r /srv/restic-repo-copy copy --from-repo /srv/restic-repo 410b18a2 4e5d5487 latest
+    $ restic -r /srv/restic-repo-copy copy --repo2 /srv/restic-repo 410b18a2 4e5d5487 latest
 
 Ensuring deduplication for copied snapshots
 -------------------------------------------
@@ -172,7 +172,7 @@ using the same chunker parameters as the source repository:
 
 .. code-block:: console
 
-    $ restic -r /srv/restic-repo-copy init --from-repo /srv/restic-repo --copy-chunker-params
+    $ restic -r /srv/restic-repo-copy init --repo2 /srv/restic-repo --copy-chunker-params
 
 Note that it is not possible to change the chunker parameters of an existing repository.
 
